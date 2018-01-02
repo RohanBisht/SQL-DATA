@@ -1,0 +1,10 @@
+/***** *****/
+ public function getConcatenatedRecords()
+    {
+        $query = $this->db->query('SELECT voltage_id , tbl_voltage.series_id , 
+        GROUP_CONCAT(DISTINCT tbl_voltage.frequency_id) AS frequency , 
+        GROUP_CONCAT(DISTINCT voltage) AS voltage , series_name , 
+        GROUP_CONCAT(DISTINCT frequency_name) AS freq from tbl_voltage INNER JOIN tbl_series ON tbl_series.series_id = tbl_voltage.series_id 
+        INNER JOIN tbl_frequency ON tbl_frequency.frequency_id = tbl_voltage.frequency_id GROUP BY tbl_voltage.series_id');
+        return $query->result();
+    }
